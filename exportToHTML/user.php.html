@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>user.php</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #ed864a;}
+.s1 { color: #ebebeb;}
+.s2 { color: #ffffff;}
+.s3 { color: #ebebeb;}
+.s4 { color: #ed864a; font-weight: bold;}
+.s5 { color: #9876aa;}
+.s6 { color: #54b33e;}
+.s7 { color: #7ec3e6;}
+</style>
+</head>
+<body bgcolor="#131314">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+user.php</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?php </span>
+    <span class="s2">session_start</span><span class="s3">()</span><span class="s4">;</span>
+
+    <span class="s0">if</span><span class="s3">(</span><span class="s0">isset</span><span class="s3">(</span><span class="s5">$_SESSION</span><span class="s3">[</span><span class="s6">'uname'</span><span class="s3">])){</span>
+        <span class="s5">$uname</span><span class="s3">=</span><span class="s5">$_SESSION</span><span class="s3">[</span><span class="s6">'uname'</span><span class="s3">]</span><span class="s4">;</span>
+        <span class="s5">$utel</span><span class="s3">=</span><span class="s5">$_SESSION</span><span class="s3">[</span><span class="s6">'utel'</span><span class="s3">]</span><span class="s4">;</span>
+        <span class="s5">$uemail</span><span class="s3">=</span><span class="s5">$_SESSION</span><span class="s3">[</span><span class="s6">'uemail'</span><span class="s3">]</span><span class="s4">;</span>
+        <span class="s5">$times</span><span class="s3">=</span><span class="s2">date</span><span class="s3">(</span><span class="s6">&quot;Y-m-d H:i:s&quot;</span><span class="s4">,</span><span class="s5">$_SESSION</span><span class="s3">[</span><span class="s6">'times'</span><span class="s3">])</span><span class="s4">;</span>
+
+        <span class="s0">include </span><span class="s6">&quot;db.php&quot;</span><span class="s4">;</span>
+
+        <span class="s5">$sql </span><span class="s3">= </span><span class="s6">&quot;select * from login_history&quot;</span><span class="s4">;</span>
+
+        <span class="s5">$res </span><span class="s3">= </span><span class="s2">mysqli_query</span><span class="s3">(</span><span class="s5">$link</span><span class="s4">,</span><span class="s5">$sql</span><span class="s3">)</span><span class="s4">;</span>
+
+
+        <span class="s5">$rows </span><span class="s3">= </span><span class="s2">mysqli_fetch_all</span><span class="s3">(</span><span class="s5">$res</span><span class="s4">,</span><span class="s2">MYSQLI_ASSOC</span><span class="s3">)</span><span class="s4">;</span>
+
+<span class="s7">//        echo '&lt;pre&gt;';print_r($rows);echo '&lt;/pre&gt;';</span>
+
+
+        <span class="s0">echo </span><span class="s6">&quot;&lt;h1&gt;您好，</span><span class="s3">{</span><span class="s5">$uname</span><span class="s3">}</span><span class="s6">&lt;/h1&gt; 
+        &lt;p&gt;您的手机号为</span><span class="s3">{</span><span class="s5">$utel</span><span class="s3">}</span><span class="s6">,最后一次登录的时间</span><span class="s3">{</span><span class="s5">$times</span><span class="s3">}</span><span class="s6">&lt;/p&gt;  
+        &lt;p&gt;找回密码时请注意邮箱</span><span class="s3">{</span><span class="s5">$uemail</span><span class="s3">}</span><span class="s6">,祝您生活愉快！&lt;/p&gt;&quot;</span><span class="s4">;</span>
+
+
+    <span class="s3">}</span><span class="s0">else </span><span class="s3">{</span>
+        <span class="s0">echo </span><span class="s6">&quot;请先登录&quot;</span><span class="s4">;</span>
+    <span class="s3">}</span>
+<span class="s0">?&gt;</span>
+    <span class="s0">&lt;table </span><span class="s2">border</span><span class="s6">=&quot;1&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;thead&gt;</span>
+        <span class="s0">&lt;tr&gt;</span>
+            <span class="s0">&lt;th&gt;</span><span class="s3">用户ID</span><span class="s0">&lt;/th&gt;</span>
+            <span class="s0">&lt;th&gt;</span><span class="s3">登录时间</span><span class="s0">&lt;/th&gt;</span>
+            <span class="s0">&lt;th&gt;</span><span class="s3">登录IP</span><span class="s0">&lt;/th&gt;</span>
+            <span class="s0">&lt;th&gt;</span><span class="s3">操作</span><span class="s0">&lt;/th&gt;</span><span class="s3">ktm,gj</span>
+        <span class="s0">&lt;/tr&gt;</span>
+        <span class="s0">&lt;/thead&gt;</span>
+        <span class="s0">&lt;tdody&gt;</span>
+        <span class="s0">&lt;?php</span>
+
+            <span class="s0">foreach</span><span class="s3">(</span><span class="s5">$rows </span><span class="s0">as </span><span class="s5">$k</span><span class="s3">=&gt;</span><span class="s5">$v</span><span class="s3">){</span>
+                <span class="s5">$time_s</span><span class="s3">=</span><span class="s2">date</span><span class="s3">(</span><span class="s6">&quot;Y-m-d H:i:s&quot;</span><span class="s4">,</span><span class="s5">$v</span><span class="s3">[</span><span class="s6">'login_time'</span><span class="s3">])</span><span class="s4">;</span>
+            <span class="s0">echo </span><span class="s6">&quot;&lt;tr&gt;&quot;</span><span class="s4">;</span>
+            <span class="s0">echo </span><span class="s6">&quot;&lt;td&gt;</span><span class="s3">{</span><span class="s5">$v</span><span class="s3">[</span><span class="s6">'uid'</span><span class="s3">]}</span><span class="s6">&lt;/td&gt;&quot;</span><span class="s4">;</span>
+            <span class="s0">echo </span><span class="s6">&quot;&lt;td&gt;</span><span class="s5">$time_s</span><span class="s6">&lt;/td&gt;&quot;</span><span class="s4">;</span>
+            <span class="s0">echo </span><span class="s6">&quot;&lt;td&gt;</span><span class="s3">{</span><span class="s5">$v</span><span class="s3">[</span><span class="s6">'login_ip'</span><span class="s3">]}</span><span class="s6">&lt;/td&gt;&quot;</span><span class="s4">;</span>
+            <span class="s0">echo </span><span class="s6">&quot;&lt;td&gt;&lt;a href='shanchu.php'&gt;删除&lt;/a&gt;&lt;/td&gt;&quot;</span><span class="s4">;</span>
+            <span class="s0">echo </span><span class="s6">&quot;&lt;/tr&gt;&quot;</span><span class="s4">;</span>
+        <span class="s3">}</span>
+        <span class="s0">?&gt;</span>
+        <span class="s0">&lt;/tdody&gt;</span>
+    <span class="s0">&lt;/table&gt;</span>
+</pre>
+</body>
+</html>
